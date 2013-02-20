@@ -295,23 +295,20 @@ class Cell(object):
                 self.set_value_explicit(days, self.TYPE_NUMERIC)
                 self._set_number_format(NumberFormat.FORMAT_DATE_TIME3)
                 return True
-        if self._data_type == self.TYPE_NUMERIC:
-            # date detection
-            # if the value is a date, but not a date time, make it a
-            # datetime, and set the time part to 0
-            if isinstance(value, datetime.date) and not \
-                    isinstance(value, datetime.datetime):
-                value = datetime.datetime.combine(value, datetime.time())
-            if isinstance(value, (datetime.datetime, datetime.time, datetime.timedelta)):
-                if isinstance(value, datetime.datetime):
-                    self._set_number_format(NumberFormat.FORMAT_DATE_YYYYMMDD2)
-                elif isinstance(value, datetime.time):
-                    self._set_number_format(NumberFormat.FORMAT_DATE_TIME6)
-                elif isinstance(value, datetime.timedelta):
-                    self._set_number_format(NumberFormat.FORMAT_DATE_TIMEDELTA)
-                value = SharedDate().datetime_to_julian(date=value)
-                self.set_value_explicit(value, self.TYPE_NUMERIC)
-                return True
+
+        # Change the value for time-related objects
+        if isinstance(value, (datetime.datetime, datetime.date, datetime.time, datetime.timedelta)):
+            if isinstance(value, datetime.datetime):
+                self._set_number_format(NumberFormat.FORMAT_DATE_DATETIME)
+            elif isinstance(value, datetime.date):
+                self._set_number_format(NumberFormat.FORMAT_DATE_DDMMYYYY)
+            elif isinstance(value, datetime.time):
+                self._set_number_format(NumberFormat.FORMAT_DATE_TIME6)
+            elif isinstance(value, datetime.timedelta):
+                self._set_number_format(NumberFormat.FORMAT_DATE_TIMEDELTA)
+            value = SharedDate().datetime_to_julian(date=value)
+            self.set_value_explicit(value, self.TYPE_NUMERIC)
+            return True
         self.set_value_explicit(value, self._data_type)
 
     def _get_value(self):
