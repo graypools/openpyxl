@@ -175,6 +175,7 @@ class Cell(object):
         }
 
     def __init__(self, worksheet, column, row, value=None):
+        self.parent = worksheet
         self.column = column.upper()
         self.row = row
         # _value is the stored value, while value is the displayed value
@@ -183,7 +184,6 @@ class Cell(object):
         self._data_type = self.TYPE_NULL
         if value:
             self.value = value
-        self.parent = worksheet
         self.xf_index = 0
         self._shared_date = SharedDate(base_date=worksheet.parent.excel_base_date)
         self.merged = False

@@ -108,6 +108,9 @@ def test_initial_value():
     cell = Cell(ws, 'A', 1, value='17.5')
     eq_(cell.TYPE_NUMERIC, cell.data_type)
 
+    cell = Cell(ws, 'A', 1, value='string')
+    eq_(cell.TYPE_STRING, cell.data_type)
+
 
 class TestCellValueTypes(object):
 
