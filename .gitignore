@@ -1,0 +1,7 @@
+# Temporary files
+*.pyc
+
+# Build-related files
+*.egg-info
+*.egg
+
