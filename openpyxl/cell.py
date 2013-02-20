@@ -171,7 +171,6 @@ class Cell(object):
     RE_PATTERNS = {
         'percentage': re.compile(r'^\-?[0-9]*\.?[0-9]*\s?\%$'),
         'time': re.compile(r'^(\d|[0-1]\d|2[0-3]):[0-5]\d(:[0-5]\d)?$'),
-        'numeric': re.compile(r'^-?([\d]|[\d]+\.[\d]*|\.[\d]+|[1-9][\d]+\.?[\d]*)((E|e)-?[\d]+)?$'),
         }
 
     def __init__(self, worksheet, column, row, value=None):
@@ -248,10 +247,6 @@ class Cell(object):
             data_type = self.TYPE_STRING
         elif isinstance(value, basestring) and value[0] == '=':
             data_type = self.TYPE_FORMULA
-        elif isinstance(value, unicode) and self.RE_PATTERNS['numeric'].match(value):
-            data_type = self.TYPE_NUMERIC
-        elif not isinstance(value, unicode) and self.RE_PATTERNS['numeric'].match(str(value)):
-            data_type = self.TYPE_NUMERIC
         elif isinstance(value, basestring) and value.strip() in self.ERROR_CODES:
           data_type = self.TYPE_ERROR
         elif isinstance(value, list):
