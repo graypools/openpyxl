@@ -22,7 +22,7 @@ them here.
 from setuptools import setup, Extension, find_packages
 import openpyxl  # to fetch __version__ etc
 
-setup(name = 'openpyxl',
+setup(name = 'openpyxl-polyconseil',
     packages = find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     # metadata
     version = openpyxl.__version__,
