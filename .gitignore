@@ -1,0 +1,10 @@
+# Temporary files
+*.pyc
+
+# Build-related files
+/dist/
+/*.egg-info
+/*.egg
+
+# Test-related files
+/.tox
