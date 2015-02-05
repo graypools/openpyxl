@@ -55,7 +55,7 @@ def get_version():
         return version_match.group(1)
     raise RuntimeError("Unable to find version string.")
 
-setup(name='openpyxl',
+setup(name='openpyxl-polyconseil',
     packages=find_packages(),
     # metadata
     version=get_version(),
