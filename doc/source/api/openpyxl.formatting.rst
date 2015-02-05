@@ -12,6 +12,22 @@ openpyxl.formatting.conditional module
     :undoc-members:
     :show-inheritance:
 
+openpyxl.formatting.formatting module
+-------------------------------------
+
+.. automodule:: openpyxl.formatting.formatting
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+openpyxl.formatting.rule module
+-------------------------------
+
+.. automodule:: openpyxl.formatting.rule
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 openpyxl.formatting.rules module
 --------------------------------
 
