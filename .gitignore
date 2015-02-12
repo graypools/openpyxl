@@ -8,3 +8,7 @@
 
 # Test-related files
 /.tox
+
+# IDE-related files
+/.idea
+.*.swp
