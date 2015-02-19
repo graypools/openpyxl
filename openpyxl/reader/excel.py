@@ -106,6 +106,7 @@ def load_workbook(filename, read_only=False, use_iterators=False, keep_vba=KEEP_
     """
 
     is_file_instance = isinstance(filename, file)
+    is_file_like = hasattr(filename, 'read')
 
     read_only = read_only or use_iterators
 
@@ -118,6 +119,9 @@ def load_workbook(filename, read_only=False, use_iterators=False, keep_vba=KEEP_
     try:
         archive = ZipFile(filename, 'r', ZIP_DEFLATED)
     except BadZipfile:
+        if is_file_like:
+            e = exc_info()[1]
+            raise InvalidFileException(unicode(e))
         file_format = os.path.splitext(filename)[-1]
         if file_format not in SUPPORTED_FORMATS:
             if file_format == '.xls':

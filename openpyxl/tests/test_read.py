@@ -19,6 +19,7 @@ from openpyxl.styles import numbers, Style
 from openpyxl.reader.worksheet import read_worksheet
 from openpyxl.reader.excel import load_workbook
 from openpyxl.utils.datetime  import CALENDAR_WINDOWS_1900, CALENDAR_MAC_1904
+from openpyxl.utils.exceptions import InvalidFileException
 
 
 def test_read_standalone_worksheet(datadir):
@@ -186,3 +187,12 @@ def test_guess_types(datadir, guess_types, dtype):
     wb = load_workbook('guess_types.xlsx', guess_types=guess_types)
     ws = wb.active
     assert isinstance(ws['D2'].value, dtype)
+
+
+def test_read_stringio():
+    filelike = BytesIO(b"certainly not a valid XSLX content")
+    # Test invalid file-like objects are detected and not handled as regular files
+    try:
+        load_workbook(filelike)
+    except Exception as exc:
+        assert isinstance(exc, InvalidFileException)
